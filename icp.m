@@ -1,12 +1,26 @@
 function [R, t, k] = icp( srcPoints, targetPoints, tau )
-% ICP Returns the rigid transofmration needed to map
-% srcPoints as closely as possible to targetPoints
-% [R, t] = icp( srcPoints, targetPoints, tau )
-% srcPoints is 3xN matrix of N 3D points
-% targetPoints is 3xM matrix of M 3D points
-% tau is a threshold such that when the RMSE between transformed srcPoints
-% and targetPoints does not change by more than tau, the iterations
-% terminate
+% ICP  Compute rigid transformation between two point sets.
+%   ICP is an implementation of the Iterative Closest Point algorithm
+%   described in Besl, P.J. & McKay, N.D. 1992, 'A Method for Registration 
+%   of 3-D Shapes', IEEE Transactions on Pattern Analysis and Machine 
+%   Intelligence, vol. 14, no. 2,  IEEE Computer Society.
+%
+%   [R, t] = ICP( srcPoints, targetPoints, tau ) iteratively seeks the
+%   rotation R and translation t which align srcPoints most closely with
+%   targetPoints. srcPoints and targetPoints are matrices of 3D points with
+%   a column for each point. Note that there is no requirement for 
+%   srcPoints to have the same number of points as targetPoints.
+%
+%   tau is a threshold such that when the RMSE between transformed 
+%   srcPoints does not change by more than this threshold between
+%   iterations the algorithm is deemed to have converged
+%
+%   [R, t, k] = ICP( srcPoints, targetPoints, tau ) returns k, the number 
+%   of iterations required to complete the match.
+%
+%
+%   For more information see <a href="matlab:
+%   web('http://graphics.stanford.edu/courses/cs164-09-spring/Handouts/paper_icp.pdf')">The ICP paper at ResearchGate</a>.
 
 
     % Number of args
